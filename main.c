@@ -6,14 +6,15 @@
 #include "hal.h"
 #include "memory_protection.h"
 #include "spi_comm.h"
+
 #include <usbcfg.h>
 #include <main.h>
 #include <chprintf.h>
 #include <motors.h>
 #include <audio/microphone.h>
+#include <audio/play_melody.h>
 #include <sensors/VL53L0X/VL53L0X.h>
 #include <leds.h>
-
 #include <search.h>
 #include <audio_processing.h>
 #include <fft.h>
@@ -58,6 +59,8 @@ int main(void)
     mic_start(&processAudioData);
     //motors and tof activated once we detect start sound to search the ball
     start_search();
+    //starts the melody
+    playMelodyStart();
 
 
     /* Infinite loop. */
@@ -69,6 +72,8 @@ int main(void)
     		 set_rgb_led(1,10,5,8);
     		 set_rgb_led(0,10,5,8);
     		 set_body_led(2);
+    		 playMelody(MARIO, ML_SIMPLE_PLAY, NULL);
+
     	}
     	chThdSleepMilliseconds(1000);
     }

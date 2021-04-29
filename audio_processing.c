@@ -59,6 +59,7 @@ void sound_remote(float* data){
 	}
 	if(max_norm_index >= FREQ_CELEB_L && max_norm_index <= FREQ_CELEB_H){
 		start_celeb = true;
+
 	}
 }
 
