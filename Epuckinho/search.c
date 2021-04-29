@@ -19,28 +19,35 @@
 static THD_WORKING_AREA(waSEARCHThd, 512);
 static THD_FUNCTION(SEARCHThd, arg) {
 	bool search=false;
+	bool no_goal=true;
 	chRegSetThreadName("SEARCHThd");
     /* Reader thread loop.*/
     while (chThdShouldTerminateX() == false ) {
 			if(get_start_detected()==true){
+				if (no_goal==false){
+					set_start_detected(false);
+					search=false;
+				}
+				else{
 				left_motor_set_speed(500);
 				right_motor_set_speed(-500);
 				search=true;
+				}
 			}
 			uint16_t dist = VL53L0X_get_dist_mm();
-			if(dist<200 && search==true){
-				set_start_detected(false);
+			if(dist<200 && search==true ){
 				left_motor_set_speed(1000);
 				right_motor_set_speed(1000);
 				chThdSleepMilliseconds(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER);
-					left_motor_set_speed(0);
-					right_motor_set_speed(0);
-					search=false;
-			}
+				left_motor_set_speed(0);
+				right_motor_set_speed(0);
+				search=false;
+				}
 			if (get_start_celeb() == true){
-				left_motor_set_speed(750);
-				right_motor_set_speed(-750);
-			}
+										left_motor_set_speed(750);
+										right_motor_set_speed(-750);
+										no_goal=false;
+										}
 			chThdSleepMilliseconds(50);
     	}
     }

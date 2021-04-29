@@ -31,12 +31,12 @@ static bool start_celeb = false;
 
 #define MIN_VALUE_THRESHOLD	10000 
 
-#define MIN_FREQ	 15	//we don't analyze before this index to not use resources for nothing
+#define MIN_FREQ	 5 //we don't analyze before this index to not use resources for nothing
 #define FREQ_START_L  143.2  //2200Hz 143.2
 #define FREQ_START_H  149.72 //2300Hz 149.72
-#define MAX_FREQ	 175	//we don't analyze after this index to not use resources for nothing
-#define FREQ_CELEB_L 19.26
-#define FREQ_CELEB_H 25.78
+#define MAX_FREQ	 160	//we don't analyze after this index to not use resources for nothing
+#define FREQ_CELEB_L 5.5 // 90Hz
+#define FREQ_CELEB_H 6.5 //100Hz
 /*
 *	Simple function used to detect the highest value in a buffer
 *	and to execute a motor command depending on it

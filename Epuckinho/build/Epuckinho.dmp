@@ -56,21 +56,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  17 .comment      0000015e  00000000  00000000  00031899  2**0
                   CONTENTS, READONLY
- 18 .debug_info   00118510  00000000  00000000  000319f7  2**0
+ 18 .debug_info   0011852d  00000000  00000000  000319f7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_abbrev 00012974  00000000  00000000  00149f07  2**0
+ 19 .debug_abbrev 00012969  00000000  00000000  00149f24  2**0
                   CONTENTS, READONLY, DEBUGGING
- 20 .debug_aranges 00002290  00000000  00000000  0015c880  2**3
+ 20 .debug_aranges 00002290  00000000  00000000  0015c890  2**3
                   CONTENTS, READONLY, DEBUGGING
- 21 .debug_ranges 00004820  00000000  00000000  0015eb10  2**0
+ 21 .debug_ranges 00004820  00000000  00000000  0015eb20  2**0
                   CONTENTS, READONLY, DEBUGGING
- 22 .debug_line   0003ce2e  00000000  00000000  00163330  2**0
+ 22 .debug_line   0003c92b  00000000  00000000  00163340  2**0
                   CONTENTS, READONLY, DEBUGGING
- 23 .debug_str    0000d208  00000000  00000000  001a015e  2**0
+ 23 .debug_str    0000d18b  00000000  00000000  0019fc6b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 24 .debug_frame  0000a310  00000000  00000000  001ad368  2**2
+ 24 .debug_frame  0000a310  00000000  00000000  001acdf8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 25 .debug_loc    00023b7a  00000000  00000000  001b7678  2**0
+ 25 .debug_loc    00023bbc  00000000  00000000  001b7108  2**0
                   CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 08000000 l    d  startup	00000000 startup
@@ -149,7 +149,7 @@ e000ed04 l       *ABS*	00000000 SCB_ICSR
 08016880 l     O .text	0000000c __func__.7153
 00000000 l    df *ABS*	00000000 fft.c
 00000000 l    df *ABS*	00000000 search.c
-08002580 l     F .text	00000104 SEARCHThd
+08002570 l     F .text	00000114 SEARCHThd
 2000d878 l     O .bss	00000378 waSEARCHThd
 00000000 l    df *ABS*	00000000 spi3_slave_lld.c
 080026d0 l     F .text	00000068 spi3_slave_lld_serve_tx_interrupt.part.0
@@ -550,7 +550,7 @@ e000ed04 l       *ABS*	00000000 SCB_ICSR
 20000ec0 l     O .data	00000428 impure_data
 08018d30 g     O .text	000000fc pal_default_config
 08002c80 g     F .text	00000084 dac_play
-080024e0 g     F .text	00000028 set_start_detected
+080024d0 g     F .text	00000028 set_start_detected
 080020f0 g     F .text	0000002c .hidden __aeabi_dcmpun
 0800d810 g     F .text	00000048 Vector58
 0800d9a0 g     F .text	00000088 Vector9C
@@ -866,7 +866,7 @@ e000ed04 l       *ABS*	00000000 SCB_ICSR
 08007c20  w    F .text	0000001c Vector1AC
 0800143c g     F .text	0000006a .hidden __aeabi_ul2d
 0800ff20 g     F .text	000000e8 usb_lld_reset
-08002510 g     F .text	00000028 get_start_celeb
+08002500 g     F .text	00000028 get_start_celeb
 080086a0 g     F .text	00000044 chSchDoReschedule
 08007c50 g     F .text	000000d0 chSysInit
 08002a10 g     F .text	000000b0 Vector178
@@ -1004,9 +1004,9 @@ e000ed04 l       *ABS*	00000000 SCB_ICSR
 00000000 g       *ABS*	00000000 __ram6_size__
 0800a580 g     F .text	0000008c gptStart
 20013480 g     O .bss	00000004 __malloc_max_total_mem
-08002540 g     F .text	00000040 doFFT_optimized
+08002530 g     F .text	00000040 doFFT_optimized
 20000900 g     O .data	00000100 T1
-080022c0 g     F .text	000001e4 processAudioData
+080022b0 g     F .text	000001e4 processAudioData
 08007c20  w    F .text	0000001c VectorA0
 200133a4 g     O .bss	0000001c PWMD4
 0800f8f0 g     F .text	000004b8 usb_lld_pump
@@ -1126,7 +1126,7 @@ e000ed04 l       *ABS*	00000000 SCB_ICSR
 0800b520 g     F .text	00000074 sdcWrite
 0800c600 g     F .text	0000003c usbPrepareQueuedTransmit
 080042e0 g     F .text	0000003c VL53L0X_SetDeviceMode
-08002200 g     F .text	000000b4 sound_remote
+08002200 g     F .text	000000ac sound_remote
 2000f858 g     O .bss	00000ffc spi_rx_buff
 08007c20 g     F .text	0000001c _unhandled_exception
 08002b20 g     F .text	0000008c spi3SlaveStart
@@ -1204,7 +1204,7 @@ e000ed04 l       *ABS*	00000000 SCB_ICSR
 080118c0 g     F .text	00000020 boardInit
 08011120 g     F .text	0000003c VectorB8
 08011780 g     F .text	000000ac sd_lld_start
-080024b0 g     F .text	00000028 get_start_detected
+080024a0 g     F .text	00000028 get_start_detected
 00000400 g       *ABS*	00000000 __main_stack_size__
 08004d90 g     F .text	00000104 VL53L0X_StartMeasurement
 0800cf80 g     F .text	00000050 VectorFC
