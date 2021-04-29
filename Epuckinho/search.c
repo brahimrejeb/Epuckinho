@@ -5,8 +5,8 @@
 #include "chprintf.h"
 #include "i2c_bus.h"
 #include "usbcfg.h"
-#include <C:\Users\Acer\Desktop\Microinformatique-TP\Projet Brahim et Nadia\audio_processing.h>
-#include <sensors/VL53L0X/VL53L0X.h>
+#include "audio_processing.h"
+#include "sensors/VL53L0X/VL53L0X.h"
 
 #define MOTOR_TIMER_FREQ 100000 // [Hz]
 #define THRESV 650 // This is the speed under which the power save feature is active.

@@ -1,45 +1,14 @@
-build/obj/main.o: main.c \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\newlib.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_newlib_version.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\config.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\ieeefp.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\features.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\cdefs.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_default_types.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stddef.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdarg.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\reent.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_types.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_types.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\lock.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\types.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_stdint.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\endian.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_endian.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\select.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_sigset.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timeval.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\timespec.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timespec.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_pthreadtypes.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\sched.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\types.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\stdio.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdlib.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\stdlib.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\alloca.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\string.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\xlocale.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\strings.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\string.h \
+build/obj/search.o: search.c \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\rt\include\ch.h \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\rt\ports\armcmx\compilers\gcc\chtypes.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stddef.h \
  c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdint.h \
  c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdint.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_default_types.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\features.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_newlib_version.h \
  c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_intsup.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_stdint.h \
  c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdbool.h \
  chconf.h \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\rt\include\chlicense.h \
@@ -130,24 +99,13 @@ build/obj/main.o: main.c \
  C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS_ext/os/hal/ports/STM32/STM32F4xx/stm32_registry.h \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\hal\include\mmc_spi.h \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\hal\include\serial_usb.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/memory_protection.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/spi_comm.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/usbcfg.h \
- main.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/camera/dcmi_camera.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS_ext/os/hal/include/dcmi.h \
- c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios_ext\os\hal\ports\stm32\stm32f4xx\dcmi_lld.h \
- c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios_ext\os\hal\ports\stm32\stm32f4xx\stm32_registry.h \
- c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios_ext\os\hal\ports\stm32\stm32f4xx\stm32_rcc.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/camera/po8030.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/msgbus/messagebus.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/parameter/parameter.h \
- c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\hal\lib\streams\chprintf.h \
  C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/motors.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/audio/microphone.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/audio/mp45dt02_processing.h \
+ C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/leds.h \
+ c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\hal\lib\streams\chprintf.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdarg.h \
+ C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/i2c_bus.h \
+ C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/usbcfg.h \
+ audio_processing.h \
  C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/sensors/VL53L0X/VL53L0X.h \
  C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api.h \
  C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/vl53l0x_api_strings.h \
@@ -157,94 +115,54 @@ build/obj/main.o: main.c \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_platform.h \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\core\inc\vl53l0x_def.h \
  c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_platform_log.h \
- c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_i2c_platform.h \
- C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/leds.h \
- search.h audio_processing.h fft.h communications.h \
- c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\ext\cmsis\include\arm_math.h \
- c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\ext\cmsis\include\core_cm4.h \
- c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\math.h
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\newlib.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_newlib_version.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\config.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\ieeefp.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\features.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\cdefs.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_default_types.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stddef.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdarg.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\reent.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_types.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_types.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\lock.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\types.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_stdint.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\endian.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_endian.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\select.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_sigset.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timeval.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\timespec.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timespec.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_pthreadtypes.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\sched.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\types.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\stdio.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdlib.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\stdlib.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\alloca.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\string.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\xlocale.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\strings.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\string.h:
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\newlib.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\config.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\ieeefp.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\cdefs.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\reent.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_types.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_types.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\lock.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\types.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\endian.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_endian.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\select.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_sigset.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timeval.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\timespec.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timespec.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_pthreadtypes.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\sched.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\types.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\stdio.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\string.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\xlocale.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\strings.h \
+ c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\string.h \
+ c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_i2c_platform.h
 
 c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\rt\include\ch.h:
 
 c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\rt\ports\armcmx\compilers\gcc\chtypes.h:
 
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stddef.h:
+
 c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdint.h:
 
 c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdint.h:
 
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_default_types.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\features.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_newlib_version.h:
+
 c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_intsup.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_stdint.h:
 
 c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdbool.h:
 
@@ -428,41 +346,19 @@ c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os
 
 c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\hal\include\serial_usb.h:
 
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/memory_protection.h:
+C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/motors.h:
 
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/spi_comm.h:
-
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/usbcfg.h:
-
-main.h:
-
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/camera/dcmi_camera.h:
-
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS_ext/os/hal/include/dcmi.h:
-
-c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios_ext\os\hal\ports\stm32\stm32f4xx\dcmi_lld.h:
-
-c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios_ext\os\hal\ports\stm32\stm32f4xx\stm32_registry.h:
-
-c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios_ext\os\hal\ports\stm32\stm32f4xx\stm32_rcc.h:
-
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/camera/po8030.h:
-
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/msgbus/messagebus.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\unistd.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\unistd.h:
-
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/parameter/parameter.h:
+C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/leds.h:
 
 c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\hal\lib\streams\chprintf.h:
 
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/motors.h:
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\lib\gcc\arm-none-eabi\7.2.1\include\stdarg.h:
 
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/audio/microphone.h:
+C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/i2c_bus.h:
 
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/audio/mp45dt02_processing.h:
+C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/usbcfg.h:
+
+audio_processing.h:
 
 C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/sensors/VL53L0X/VL53L0X.h:
 
@@ -482,20 +378,58 @@ c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensor
 
 c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_platform_log.h:
 
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\stdio.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\newlib.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\config.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\ieeefp.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\cdefs.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\reent.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\_ansi.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_types.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_types.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\lock.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\types.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\endian.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\_endian.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\select.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_sigset.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timeval.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\timespec.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_timespec.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\_pthreadtypes.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\sched.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\machine\types.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\stdio.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\string.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\xlocale.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\strings.h:
+
+c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\sys\string.h:
+
 c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\src\sensors\vl53l0x\api\platform\inc\vl53l0x_i2c_platform.h:
-
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/src/leds.h:
-
-search.h:
-
-audio_processing.h:
-
-fft.h:
-
-communications.h:
-
-c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\ext\cmsis\include\arm_math.h:
-
-c:\users\acer\desktop\microinformatique-tp\lib\e-puck2_main-processor\chibios\os\ext\cmsis\include\core_cm4.h:
-
-c:\users\acer\desktop\microinformatique-tp\eclipse_e-puck2\tools\gcc-arm-none-eabi-7-2017-q4-major-win32\arm-none-eabi\include\math.h:

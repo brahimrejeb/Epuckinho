@@ -15,10 +15,10 @@
 #include "audio/audio_thread.h"
 #include "audio/play_melody.h"
 #include "audio/play_sound_file.h"
-#include <sensors/VL53L0X/VL53L0X.h>
-#include <leds.h>
-#include <search.h>
-#include <audio_processing.h>
+#include "sensors/VL53L0X/VL53L0X.h"
+#include "leds.h"
+#include "search.h"
+#include "audio_processing.h"
 #include <fft.h>
 #include <communications.h>
 #include <arm_math.h>
@@ -48,10 +48,11 @@ int main(void)
 
     //starts the serial communication
     serial_start();
-    //start SPI
-    spi_comm_start();
     //starts the USB communication
     usb_start();
+    //start SPI
+    dac_start();
+    spi_comm_start();
     //inits the motors
     motors_init();
     //starts ToF
@@ -74,8 +75,7 @@ int main(void)
     		 set_rgb_led(1,10,5,8);
     		 set_rgb_led(0,10,5,8);
     		 set_body_led(2);
-    		 playMelody(MARIO, ML_SIMPLE_PLAY, NULL);
-
+    		 playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
     	}
     	chThdSleepMilliseconds(1000);
     }
