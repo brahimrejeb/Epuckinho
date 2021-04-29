@@ -12,7 +12,9 @@
 #include <chprintf.h>
 #include <motors.h>
 #include <audio/microphone.h>
-#include <audio/play_melody.h>
+#include "audio/audio_thread.h"
+#include "audio/play_melody.h"
+#include "audio/play_sound_file.h"
 #include <sensors/VL53L0X/VL53L0X.h>
 #include <leds.h>
 #include <search.h>
