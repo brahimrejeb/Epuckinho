@@ -22,6 +22,7 @@
 #include <fft.h>
 #include <communications.h>
 #include <arm_math.h>
+#include <timer.h>
 
 
 
@@ -64,19 +65,33 @@ int main(void)
     start_search();
     //starts the melody
     playMelodyStart();
+    //starts timer to detect fail
+    SystemClock_Config();
+    timer7_start();
 
 
     /* Infinite loop. */
     while (1) {
-    	if (get_start_celeb()==true){
+    	if (get_start_celeb()==true  && get_fail_to_score()==false ){
     		//set_front_led(1);
-    		 set_rgb_led(3,10,5,8);
-    		 set_rgb_led(2,10,5,8);
-    		 set_rgb_led(1,10,5,8);
-    		 set_rgb_led(0,10,5,8);
-    		 set_body_led(2);
-    		 playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
+    		set_rgb_led(3,10,5,8);
+    		set_rgb_led(2,10,5,8);
+    		set_rgb_led(1,10,5,8);
+    		set_rgb_led(0,10,5,8);
+    		set_body_led(2);
+    		playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
     	}
+    	if (get_fail_to_score()==true){
+    		//set_front_led(1);
+    		set_rgb_led(3,10,0,0);
+    		set_rgb_led(2,10,0,0);
+    		set_rgb_led(1,10,0,0);
+    		set_rgb_led(0,10,0,0);
+    		set_front_led(2);
+    		left_motor_set_speed(0);
+    		right_motor_set_speed(0);
+    		playMelody(MARIO, ML_SIMPLE_PLAY, NULL);
+         }
     	chThdSleepMilliseconds(1000);
     }
 }
