@@ -20,6 +20,7 @@ static THD_WORKING_AREA(waSEARCHThd, 512);
 static THD_FUNCTION(SEARCHThd, arg) {
 	bool search=false;
 	bool no_goal=true;
+	uint16_t dist=0;
 	chRegSetThreadName("SEARCHThd");
     /* Reader thread loop.*/
     while (chThdShouldTerminateX() == false ) {
@@ -34,7 +35,7 @@ static THD_FUNCTION(SEARCHThd, arg) {
 				search=true;
 				}
 			}
-			uint16_t dist = VL53L0X_get_dist_mm();
+			 dist= VL53L0X_get_dist_mm();
 			if(dist<200 && search==true ){
 				left_motor_set_speed(1000);
 				right_motor_set_speed(1000);
