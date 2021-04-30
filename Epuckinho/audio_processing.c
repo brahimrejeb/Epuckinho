@@ -30,6 +30,7 @@ static float micBack_output[FFT_SIZE];
 //start_detection flag
 static bool start_detected = false;
 static bool start_celeb = false;
+static uint32_t time_start=0;
 
 #define MIN_VALUE_THRESHOLD	10000 
 
@@ -46,7 +47,6 @@ static bool start_celeb = false;
 void sound_remote(float* data){
 	float max_norm = MIN_VALUE_THRESHOLD;
 	int16_t max_norm_index = -1; 
-
 	//search for the highest peak
 	for(uint16_t i = MIN_FREQ ; i <= MAX_FREQ ; i++){
 		if(data[i] > max_norm){
@@ -58,6 +58,7 @@ void sound_remote(float* data){
 	//go forward
 	if(max_norm_index >= FREQ_START_L && max_norm_index <= FREQ_START_H){
 		start_detected = true;
+		time_start=chVTGetSystemTime();
 	}
 	if(max_norm_index >= FREQ_CELEB_L && max_norm_index <= FREQ_CELEB_H){
 		start_celeb = true;
@@ -194,4 +195,7 @@ bool get_start_celeb (void){
 
 void set_start_celeb (bool state){
 	start_celeb =state;
+}
+uint32_t get_start_time(void){
+	return start_time;
 }

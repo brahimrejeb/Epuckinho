@@ -8,7 +8,7 @@
 #include "audio_processing.h"
 #include "sensors/VL53L0X/VL53L0X.h"
 
-#include <timer.h>
+
 
 #define MOTOR_TIMER_FREQ 100000 // [Hz]
 #define THRESV 650 // This is the speed under which the power save feature is active.
@@ -25,7 +25,7 @@ static THD_FUNCTION(SEARCHThd, arg) {
 	uint16_t dist=0;
 	chRegSetThreadName("SEARCHThd");
     /* Reader thread loop.*/
-    while (chThdShouldTerminateX() == false && get_fail_to_score()==false ){
+    while (chThdShouldTerminateX() == false){
 			if(get_start_detected()==true){
 				if (no_goal==false){
 					set_start_detected(false);
