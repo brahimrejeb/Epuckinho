@@ -1,5 +1,7 @@
 #include <ch.h>
 #include <hal.h>
+#include <main.h>
+
 #include "motors.h"
 #include "leds.h"
 #include "chprintf.h"
@@ -25,7 +27,7 @@ static THD_FUNCTION(SEARCHThd, arg) {
 	uint16_t dist=0;
 	chRegSetThreadName("SEARCHThd");
     /* Reader thread loop.*/
-    while (chThdShouldTerminateX() == false){
+    while (chThdShouldTerminateX() == false && get_fail_to_score()== false){
 			if(get_start_detected()==true){
 				if (no_goal==false){
 					set_start_detected(false);

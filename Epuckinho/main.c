@@ -22,9 +22,7 @@
 #include <fft.h>
 #include <communications.h>
 #include <arm_math.h>
-
-
-
+static bool fail_to_score = false;
 
 static void serial_start(void)
 {
@@ -69,7 +67,7 @@ int main(void)
 
     /* Infinite loop. */
     while (1) {
-    	if (get_start_celeb()==true ){
+    	if (get_start_celeb()==true && fail_to_score ==false ){
     		//set_front_led(1);
     		set_rgb_led(3,10,5,8);
     		set_rgb_led(2,10,5,8);
@@ -78,19 +76,16 @@ int main(void)
     		set_body_led(2);
     		playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
     	}
-    	if (chVTGetSystemTime()-get_start_time() > 10000){
-    		 chSysLock();
+    	if (chVTGetSystemTime()-get_start_time() > 10000 ){
+    		 fail_to_score = true;
+    		 playMelody(MARIO, ML_SIMPLE_PLAY, NULL);
     		 left_motor_set_speed(0);
     		 right_motor_set_speed(0);
-    		 while(1){
-    			 set_rgb_led(3,10,5,8);
-    			 set_rgb_led(2,10,5,8);
-    			 set_rgb_led(1,10,5,8);
-    			 set_rgb_led(0,10,5,8);
-    			 set_front_led(2);
-    			 playMelody(Mario, ML_SIMPLE_PLAY, NULL);
-    		 }
-    		 chSysUnlock();
+    		 set_rgb_led(3,10,5,8);
+    		 set_rgb_led(2,10,5,8);
+    		 set_rgb_led(1,10,5,8);
+    		 set_rgb_led(0,10,5,8);
+    		 set_front_led(2);
     	}
     	chThdSleepMilliseconds(1000);
     }
@@ -103,5 +98,9 @@ void __stack_chk_fail(void)
 {
     chSysHalt("Stack smashing detected");
 }
+bool get_fail_to_score(void){
+	return fail_to_score;
+}
+
 
 /*Github switch*/
