@@ -76,9 +76,9 @@ int main(void)
     		set_body_led(2);
     		playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
     	}
-    	if (chVTGetSystemTime()-get_start_time() > 10000 ){
+    	if (chVTGetSystemTime()-get_time_start() > 10000 && get_start_detected()==true){
     		 fail_to_score = true;
-    		 playMelody(MARIO, ML_SIMPLE_PLAY, NULL);
+    		 playMelody(MARIO_DEATH, ML_SIMPLE_PLAY, NULL);
     		 left_motor_set_speed(0);
     		 right_motor_set_speed(0);
     		 set_rgb_led(3,10,5,8);

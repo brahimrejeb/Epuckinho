@@ -40,7 +40,7 @@ static THD_FUNCTION(SEARCHThd, arg) {
 				}
 			}
 			 dist= VL53L0X_get_dist_mm();
-			if(dist<200 && search==true ){
+			if(dist<90 && search==true ){
 				left_motor_set_speed(1000);
 				right_motor_set_speed(1000);
 				chThdSleepMilliseconds(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER);

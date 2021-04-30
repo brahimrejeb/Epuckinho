@@ -34,5 +34,5 @@ bool get_start_detected(void);
 void set_start_detected(bool state);
 bool get_start_celeb (void);
 void set_start_celeb(bool state);
-uint32_t get_start_time(void);
+uint32_t get_time_start(void);
 #endif /* AUDIO_PROCESSING_H */

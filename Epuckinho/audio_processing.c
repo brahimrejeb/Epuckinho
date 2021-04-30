@@ -196,6 +196,6 @@ bool get_start_celeb (void){
 void set_start_celeb (bool state){
 	start_celeb =state;
 }
-uint32_t get_start_time(void){
-	return start_time;
+uint32_t get_time_start(void){
+	return time_start;
 }
