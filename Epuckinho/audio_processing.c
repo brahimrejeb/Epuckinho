@@ -35,8 +35,8 @@ static uint32_t time_start=0;
 #define MIN_VALUE_THRESHOLD	10000 
 
 #define MIN_FREQ	 5 //we don't analyze before this index to not use resources for nothing
-#define FREQ_START_L  143.2  //2200Hz 143.2
-#define FREQ_START_H  149.72 //2300Hz 149.72
+#define FREQ_START_L  143.2  //2200Hz
+#define FREQ_START_H  149.72 //2300Hz
 #define MAX_FREQ	 160	//we don't analyze after this index to not use resources for nothing
 #define FREQ_CELEB_L 5.5 // 90Hz
 #define FREQ_CELEB_H 6.5 //100Hz
@@ -55,14 +55,14 @@ void sound_remote(float* data){
 		}
 	}
 
-	//go forward
+	//START TO PLAY
 	if(max_norm_index >= FREQ_START_L && max_norm_index <= FREQ_START_H){
 		start_detected = true;
 		time_start=chVTGetSystemTime();
 	}
+	//A GOAL IS DETECTED: CELEBRATE IT !
 	if(max_norm_index >= FREQ_CELEB_L && max_norm_index <= FREQ_CELEB_H){
 		start_celeb = true;
-
 	}
 }
 

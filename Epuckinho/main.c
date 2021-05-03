@@ -24,6 +24,17 @@
 #include <arm_math.h>
 static bool fail_to_score = false;
 
+#define LED_RGB_0 0
+#define LED_RGB_1 1
+#define LED_RGB_2 2
+#define LED_RGB_3 3
+#define COLOR_LED_R 10
+#define COLOR_LED_G 5
+#define COLOR_LED_B 8
+#define SLEEP_THD 1000
+#define BLINK_MODE 2
+#define GAME_OVER 10000 //in ms = 10s to score (the match ends and Epuckinho loses)
+
 static void serial_start(void)
 {
 	static SerialConfig ser_cfg = {
@@ -36,7 +47,27 @@ static void serial_start(void)
 	sdStart(&SD3, &ser_cfg); // UART3.
 }
 
-
+void celebrate(void)
+{
+	set_rgb_led(LED_RGB_3 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_rgb_led(LED_RGB_2 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_rgb_led(LED_RGB_1 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_rgb_led(LED_RGB_0 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_body_led(BLINK_MODE);
+	playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
+}
+void game_over(void)
+{
+	 fail_to_score = true;
+	 playMelody(MARIO_DEATH, ML_SIMPLE_PLAY, NULL);
+	 left_motor_set_speed(STOP_SPEED);
+	 right_motor_set_speed(STOP_SPEED);
+	 set_rgb_led(LED_RGB_3 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_rgb_led(LED_RGB_2 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_rgb_led(LED_RGB_1 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_rgb_led(LED_RGB_0 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_front_led(BLINK_MODE);
+}
 
 int main(void)
 {
@@ -50,7 +81,7 @@ int main(void)
     //starts the USB communication
     usb_start();
     //start SPI
-    dac_start();
+    dac_start(); //à verifier
     spi_comm_start();
     //inits the motors
     motors_init();
@@ -59,7 +90,7 @@ int main(void)
     //starts the microphones processing thread.
     //it calls the callback given in parameter when samples are ready
     mic_start(&processAudioData);
-    //motors and tof activated once we detect start sound to search the ball
+    //motors and ToF activated once we detect start sound to search the ball
     start_search();
     //starts the melody
     playMelodyStart();
@@ -68,26 +99,12 @@ int main(void)
     /* Infinite loop. */
     while (1) {
     	if (get_start_celeb()==true && fail_to_score ==false ){
-    		//set_front_led(1);
-    		set_rgb_led(3,10,5,8);
-    		set_rgb_led(2,10,5,8);
-    		set_rgb_led(1,10,5,8);
-    		set_rgb_led(0,10,5,8);
-    		set_body_led(2);
-    		playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
+    		celebrate();
     	}
-    	if (chVTGetSystemTime()-get_time_start() > 10000 && get_start_detected()==true){
-    		 fail_to_score = true;
-    		 playMelody(MARIO_DEATH, ML_SIMPLE_PLAY, NULL);
-    		 left_motor_set_speed(0);
-    		 right_motor_set_speed(0);
-    		 set_rgb_led(3,10,5,8);
-    		 set_rgb_led(2,10,5,8);
-    		 set_rgb_led(1,10,5,8);
-    		 set_rgb_led(0,10,5,8);
-    		 set_front_led(2);
+    	if (chVTGetSystemTime()-get_time_start() > GAME_OVER && get_start_detected()==true){
+    		game_over();
     	}
-    	chThdSleepMilliseconds(1000);
+    	chThdSleepMilliseconds(SLEEP_THD);
     }
 }
 

@@ -17,8 +17,16 @@
 #define WHEEL_PERIMETER     130 // [mm]
 #define NSTEP_ONE_TURN      1000 // number of steps for 1 turn of the motor
 #define THREASHOLD_STOP 35
+#define SEARCH_SPEED_LEFT 500
+#define SEARCH_SPEED_RIGHT -500
+#define ATTACK_SPEED 1000
+#define STOP_SPEED 0
+#define CELEB_SPEED_LEFT 750
+#define CELEB_SPEED_RIGHT -750
+#define SLEEP_THD_SEARCH 50
+#define BALL_IN_THE_AREA 90
 
-/************************THREAD*********************/
+/************************SEARCH THREAD*********************/
 
 static THD_WORKING_AREA(waSEARCHThd, 512);
 static THD_FUNCTION(SEARCHThd, arg) {
@@ -34,26 +42,26 @@ static THD_FUNCTION(SEARCHThd, arg) {
 					search=false;
 				}
 				else{
-				left_motor_set_speed(500);
-				right_motor_set_speed(-500);
+				left_motor_set_speed(SEARCH_SPEED_LEFT);
+				right_motor_set_speed(SEARCH_SPEED_RIGHT);
 				search=true;
 				}
 			}
 			 dist= VL53L0X_get_dist_mm();
-			if(dist<90 && search==true ){
-				left_motor_set_speed(1000);
-				right_motor_set_speed(1000);
+			if(dist<BALL_IN_THE_AREA && search==true ){
+				left_motor_set_speed(ATTACK_SPEED);
+				right_motor_set_speed(ATTACK_SPEED);
 				chThdSleepMilliseconds(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER);
-				left_motor_set_speed(0);
-				right_motor_set_speed(0);
+				left_motor_set_speed(STOP_SPEED);
+				right_motor_set_speed(STOP_SPEED);
 				search=false;
 			}
 			if (get_start_celeb() == true){
-				left_motor_set_speed(750);
-				right_motor_set_speed(-750);
+				left_motor_set_speed(CELEB_SPEED_LEFT);
+				right_motor_set_speed(CELEB_SPEED_RIGHT);
 				no_goal=false;
 			}
-			chThdSleepMilliseconds(50);
+			chThdSleepMilliseconds(SLEEP_THD_SEARCH);
     	}
     }
 
