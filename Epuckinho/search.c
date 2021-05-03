@@ -24,7 +24,7 @@
 #define CELEB_SPEED_LEFT 750
 #define CELEB_SPEED_RIGHT -750
 #define SLEEP_THD_SEARCH 50
-#define BALL_IN_THE_AREA 90
+#define BALL_IN_THE_AREA 500
 
 /************************SEARCH THREAD*********************/
 
@@ -71,7 +71,7 @@ static THD_FUNCTION(SEARCHThd, arg) {
 void start_search(void){
 	chThdCreateStatic(waSEARCHThd,
 	                     sizeof(waSEARCHThd),
-	                     NORMALPRIO+2,
+	                     NORMALPRIO+10,
 	                     SEARCHThd,
 	                     NULL);
 }

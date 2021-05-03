@@ -15,7 +15,7 @@
 
 
 //semaphore
-static BSEMAPHORE_DECL(sendToComputer_sem, TRUE);
+//static BSEMAPHORE_DECL(sendToComputer_sem, TRUE);
 
 //2 times FFT_SIZE because these arrays contain complex numbers (real + imaginary)
 static float micLeft_cmplx_input[2 * FFT_SIZE];
@@ -139,7 +139,7 @@ void processAudioData(int16_t *data, uint16_t num_samples){
 		//sends to UART3
 		if(mustSend > 8){
 			//signals to send the result to the computer
-			chBSemSignal(&sendToComputer_sem);
+			//chBSemSignal(&sendToComputer_sem);
 			mustSend = 0;
 		}
 		nb_samples = 0;
@@ -148,9 +148,9 @@ void processAudioData(int16_t *data, uint16_t num_samples){
 	}
 }
 
-void wait_send_to_computer(void){
+/*void wait_send_to_computer(void){
 	chBSemWait(&sendToComputer_sem);
-}
+}*/
 
 float* get_audio_buffer_ptr(BUFFER_NAME_t name){
 	if(name == LEFT_CMPLX_INPUT){

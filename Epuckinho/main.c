@@ -24,10 +24,10 @@
 #include <arm_math.h>
 static bool fail_to_score = false;
 
-#define LED_RGB_0 0
-#define LED_RGB_1 1
-#define LED_RGB_2 2
-#define LED_RGB_3 3
+#define LED2_RGB 0
+#define LED4_RGB 1
+#define LED6_RGB 2
+#define LED8_RGB 3
 #define COLOR_LED_R 10
 #define COLOR_LED_G 5
 #define COLOR_LED_B 8
@@ -49,10 +49,10 @@ static void serial_start(void)
 
 void celebrate(void)
 {
-	set_rgb_led(LED_RGB_3 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
-	set_rgb_led(LED_RGB_2 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
-	set_rgb_led(LED_RGB_1 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
-	set_rgb_led(LED_RGB_0 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_rgb_led(LED8_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_rgb_led(LED6_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_rgb_led(LED4_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	set_rgb_led(LED2_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
 	set_body_led(BLINK_MODE);
 	playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL);
 }
@@ -62,10 +62,10 @@ void game_over(void)
 	 playMelody(MARIO_DEATH, ML_SIMPLE_PLAY, NULL);
 	 left_motor_set_speed(STOP_SPEED);
 	 right_motor_set_speed(STOP_SPEED);
-	 set_rgb_led(LED_RGB_3 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
-	 set_rgb_led(LED_RGB_2 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
-	 set_rgb_led(LED_RGB_1 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
-	 set_rgb_led(LED_RGB_0 ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_rgb_led(LED8_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_rgb_led(LED6_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_rgb_led(LED4_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
+	 set_rgb_led(LED2_RGB ,COLOR_LED_R,COLOR_LED_G,COLOR_LED_B);
 	 set_front_led(BLINK_MODE);
 }
 
@@ -81,7 +81,6 @@ int main(void)
     //starts the USB communication
     usb_start();
     //start SPI
-    dac_start(); //à verifier
     spi_comm_start();
     //inits the motors
     motors_init();
@@ -93,6 +92,7 @@ int main(void)
     //motors and ToF activated once we detect start sound to search the ball
     start_search();
     //starts the melody
+    dac_start();
     playMelodyStart();
 
 
