@@ -101,9 +101,9 @@ int main(void)
     	if (get_start_celeb()==true && fail_to_score ==false ){
     		celebrate();
     	}
-    	if (chVTGetSystemTime()-get_time_start() > GAME_OVER && get_start_detected()==true){
-    		game_over();
-    	}
+    	//if (chVTGetSystemTime()-get_time_start() > GAME_OVER && get_start_detected()==true){
+    		//game_over();
+    	//}
     	chThdSleepMilliseconds(SLEEP_THD);
     }
 }

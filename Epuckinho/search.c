@@ -23,7 +23,7 @@
 #define STOP_SPEED 0
 #define CELEB_SPEED_LEFT 750
 #define CELEB_SPEED_RIGHT -750
-#define SLEEP_THD_SEARCH 50
+#define SLEEP_THD_SEARCH 100
 #define BALL_IN_THE_AREA 500
 
 /************************SEARCH THREAD*********************/
@@ -49,11 +49,10 @@ static THD_FUNCTION(SEARCHThd, arg) {
 			}
 			 dist= VL53L0X_get_dist_mm();
 			if(dist<BALL_IN_THE_AREA && search==true ){
+				left_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER);
+				right_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER);
 				left_motor_set_speed(ATTACK_SPEED);
 				right_motor_set_speed(ATTACK_SPEED);
-				chThdSleepMilliseconds(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER);
-				left_motor_set_speed(STOP_SPEED);
-				right_motor_set_speed(STOP_SPEED);
 				search=false;
 			}
 			if (get_start_celeb() == true){
@@ -71,7 +70,7 @@ static THD_FUNCTION(SEARCHThd, arg) {
 void start_search(void){
 	chThdCreateStatic(waSEARCHThd,
 	                     sizeof(waSEARCHThd),
-	                     NORMALPRIO+10,
+	                     NORMALPRIO,
 	                     SEARCHThd,
 	                     NULL);
 }

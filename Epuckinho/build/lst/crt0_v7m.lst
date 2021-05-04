@@ -1,11 +1,10 @@
-ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 1
+ARM GAS  /var/folders/21/4q6hj_5j77l1y0kst8hx_6f00000gn/T//ccQ4nh9m.s 			page 1
 
 
-   1              	# 1 "c:\\users\\acer\\desktop\\microinformatique-tp\\lib\\e-puck2_main-processor\\chibios\\os\\comm
+   1              	# 1 "../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s"
    1              	/*
    0              	
    0              	
-   1              	/*
    2              	    ChibiOS - Copyright (C) 2006..2015 Giovanni Di Sirio.
    3              	
    4              	    This file is part of ChibiOS.
@@ -58,10 +57,10 @@ ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 1
   51              	#define SCB_FPDSCR                          0xE000EF3C
   52              	
   53              	/*===========================================================================*/
-ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 2
-
-
   54              	/* Module pre-compile time settings.                                         */
+ARM GAS  /var/folders/21/4q6hj_5j77l1y0kst8hx_6f00000gn/T//ccQ4nh9m.s 			page 2
+
+
   55              	/*===========================================================================*/
   56              	
   57              	/**
@@ -118,10 +117,10 @@ ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 1
  108              	
  109              	/**
  110              	 * @brief   FPU initialization switch.
-ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 3
-
-
  111              	 */
+ARM GAS  /var/folders/21/4q6hj_5j77l1y0kst8hx_6f00000gn/T//ccQ4nh9m.s 			page 3
+
+
  112              	#if !defined(CRT0_INIT_FPU) || defined(__DOXYGEN__)
  113              	#if defined(CORTEX_USE_FPU) || defined(__DOXYGEN__)
  114              	#define CRT0_INIT_FPU                       CORTEX_USE_FPU
@@ -178,10 +177,10 @@ ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 1
  165 0004 80F30988 	                msr     PSP, r0
  166              	
  167              	#if CRT0_INIT_FPU == TRUE
-ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 4
-
-
  168              	                /* FPU FPCCR initialization.*/
+ARM GAS  /var/folders/21/4q6hj_5j77l1y0kst8hx_6f00000gn/T//ccQ4nh9m.s 			page 4
+
+
  169 0008 40F20000 	                movw    r0, #CRT0_FPCCR_INIT & 0xFFFF
  170 000c CCF20000 	                movt    r0, #CRT0_FPCCR_INIT >> 16
  171 0010 4EF63471 	                movw    r1, #SCB_FPCCR & 0xFFFF
@@ -238,10 +237,10 @@ ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 1
  222 0060 164A     	                ldr     r2, =__process_stack_end__
  223              	psloop:
  224 0062 9142     	                cmp     r1, r2
-ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 5
-
-
  225 0064 3CBF     	                itt     lo
+ARM GAS  /var/folders/21/4q6hj_5j77l1y0kst8hx_6f00000gn/T//ccQ4nh9m.s 			page 5
+
+
  226 0066 41F8040B 	                strlo   r0, [r1], #4
  227 006a FAE7     	                blo     psloop
  228              	#endif
@@ -298,10 +297,10 @@ ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 1
  279 00aa 104D     	                ldr     r5, =__fini_array_end
  280              	finiloop:
  281 00ac AC42     	                cmp     r4, r5
-ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 6
-
-
  282 00ae 03DA     	                bge     endfiniloop
+ARM GAS  /var/folders/21/4q6hj_5j77l1y0kst8hx_6f00000gn/T//ccQ4nh9m.s 			page 6
+
+
  283 00b0 54F8041B 	                ldr     r1, [r4], #4
  284 00b4 8847     	                blx     r1
  285 00b6 F9E7     	                b       finiloop
@@ -314,21 +313,21 @@ ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 1
  290      00000000 
  290      00000000 
  290      00000000 
-ARM GAS  C:\Users\Acer\AppData\Local\Temp\ccn5Xipw.s 			page 7
+ARM GAS  /var/folders/21/4q6hj_5j77l1y0kst8hx_6f00000gn/T//ccQ4nh9m.s 			page 7
 
 
 DEFINED SYMBOLS
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:156    .text:00000000 $t
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:159    .text:00000000 Reset_Handler
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:212    .text:00000054 msloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:223    .text:00000062 psloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:236    .text:00000072 dloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:250    .text:00000086 bloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:264    .text:00000098 initloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:270    .text:000000a4 endinitloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:280    .text:000000ac finiloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:286    .text:000000b8 endfiniloop
-C:\Users\Acer\Desktop\Microinformatique-TP\lib\e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:290    .text:000000bc $d
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:156    .text:0000000000000000 $t
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:159    .text:0000000000000000 Reset_Handler
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:212    .text:0000000000000054 msloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:223    .text:0000000000000062 psloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:236    .text:0000000000000072 dloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:250    .text:0000000000000086 bloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:264    .text:0000000000000098 initloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:270    .text:00000000000000a4 endinitloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:280    .text:00000000000000ac finiloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:286    .text:00000000000000b8 endfiniloop
+../../lib/e-puck2_main-processor/ChibiOS//os/common/ports/ARMCMx/compilers/GCC/crt0_v7m.s:290    .text:00000000000000bc $d
 
 UNDEFINED SYMBOLS
 __process_stack_end__
