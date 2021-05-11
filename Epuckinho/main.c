@@ -94,8 +94,6 @@ int main(void)
     proximity_start();
     calibrate_ir();
 
-
-
     //starts ToF
     VL53L0X_start();
     //starts the microphones processing thread.
@@ -110,16 +108,8 @@ int main(void)
 
     /* Infinite loop. */
     while (1) {
-
-        //messagebus_topic_t *prox_topic = messagebus_find_topic_blocking(&bus, "/proximity");
-        //proximity_msg_t prox_values;
-
-       // messagebus_topic_wait(prox_topic, &prox_values, sizeof(prox_values));
-
-
-        if (get_prox(0) < 20){
-        	set_body_led(BLINK_MODE);
-        }
+       // chprintf((BaseSequentialStream *)&SD3, "%4d", get_prox(1));
+       // chprintf((BaseSequentialStream *)&SD3, "%4d", get_prox(6));
     	if (get_start_celeb()==true && fail_to_score ==false ){
     		celebrate();
     	}

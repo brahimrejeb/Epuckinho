@@ -4,6 +4,7 @@
 
 #include "motors.h"
 #include "leds.h"
+#include "sensors/proximity.h"
 #include "chprintf.h"
 #include "i2c_bus.h"
 #include "usbcfg.h"
@@ -26,6 +27,26 @@
 #define SLEEP_THD_SEARCH 100
 #define BALL_IN_THE_AREA 500
 
+
+void search_control(void){
+	if ((get_prox(0)>100 && get_prox(7)>100) | (get_prox(3)>100 && get_prox(4)>100)){
+		left_motor_set_speed(SEARCH_SPEED_LEFT);
+		right_motor_set_speed(SEARCH_SPEED_RIGHT);
+	}
+	else if (get_prox(0)>100 || get_prox(1)>100 || get_prox(2)>100 || get_prox(3)>100){
+			left_motor_set_speed(SEARCH_SPEED_LEFT);
+			right_motor_set_speed(SEARCH_SPEED_RIGHT);
+	}
+	else if (get_prox(4)>100 || get_prox(5)>100 || get_prox(6)>100 || get_prox(7)>100){
+		left_motor_set_speed(SEARCH_SPEED_RIGHT);
+		right_motor_set_speed(SEARCH_SPEED_LEFT);
+	}
+	else {
+		left_motor_set_speed(SEARCH_SPEED_LEFT);
+		right_motor_set_speed(SEARCH_SPEED_RIGHT);
+	}
+}
+
 /************************SEARCH THREAD*********************/
 
 static THD_WORKING_AREA(waSEARCHThd, 512);
@@ -43,8 +64,9 @@ static THD_FUNCTION(SEARCHThd, arg) {
 					search=false;
 				}
 				else{
-				left_motor_set_speed(SEARCH_SPEED_LEFT);
-				right_motor_set_speed(SEARCH_SPEED_RIGHT);
+				search_control();
+				//left_motor_set_speed(SEARCH_SPEED_LEFT);
+				//right_motor_set_speed(SEARCH_SPEED_RIGHT);
 				search=true;
 				}
 			}
@@ -75,5 +97,6 @@ void start_search(void){
 	                     SEARCHThd,
 	                     NULL);
 }
+
 
 

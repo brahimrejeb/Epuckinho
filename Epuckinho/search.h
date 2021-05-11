@@ -5,6 +5,6 @@
 
 void start_search(void);
 
-
+void search_control(void);
 
 #endif /* SEARCH_H_ */
