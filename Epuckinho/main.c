@@ -16,6 +16,7 @@
 #include "audio/play_melody.h"
 #include "audio/play_sound_file.h"
 #include "sensors/VL53L0X/VL53L0X.h"
+#include "sensors/proximity.h"
 #include "leds.h"
 #include "search.h"
 #include "audio_processing.h"
@@ -34,6 +35,10 @@ static bool fail_to_score = false;
 #define SLEEP_THD 1000
 #define BLINK_MODE 2
 #define GAME_OVER 10000 //in ms = 10s to score (the match ends and Epuckinho loses)
+
+messagebus_t bus;
+MUTEX_DECL(bus_lock);
+CONDVAR_DECL(bus_condvar);
 
 static void serial_start(void)
 {
@@ -84,6 +89,13 @@ int main(void)
     spi_comm_start();
     //inits the motors
     motors_init();
+
+    messagebus_init(&bus, &bus_lock, &bus_condvar);
+    proximity_start();
+    calibrate_ir();
+
+
+
     //starts ToF
     VL53L0X_start();
     //starts the microphones processing thread.
@@ -98,6 +110,16 @@ int main(void)
 
     /* Infinite loop. */
     while (1) {
+
+        //messagebus_topic_t *prox_topic = messagebus_find_topic_blocking(&bus, "/proximity");
+        //proximity_msg_t prox_values;
+
+       // messagebus_topic_wait(prox_topic, &prox_values, sizeof(prox_values));
+
+
+        if (get_prox(0) < 20){
+        	set_body_led(BLINK_MODE);
+        }
     	if (get_start_celeb()==true && fail_to_score ==false ){
     		celebrate();
     	}

@@ -30,6 +30,7 @@
 
 static THD_WORKING_AREA(waSEARCHThd, 512);
 static THD_FUNCTION(SEARCHThd, arg) {
+	(void)arg;
 	bool search=false;
 	bool no_goal=true;
 	uint16_t dist=0;

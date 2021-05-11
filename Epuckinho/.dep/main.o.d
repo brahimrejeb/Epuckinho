@@ -160,6 +160,7 @@ build/obj/main.o: main.c \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/../../core/inc/vl53l0x_def.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform_log.h \
  ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h \
+ ../../lib/e-puck2_main-processor/src/sensors/proximity.h \
  ../../lib/e-puck2_main-processor/src/leds.h search.h audio_processing.h \
  fft.h communications.h \
  ../../lib/e-puck2_main-processor/ChibiOS//os/ext/CMSIS/include/arm_math.h \
@@ -491,6 +492,8 @@ main.h:
 ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_platform_log.h:
 
 ../../lib/e-puck2_main-processor/src/sensors/VL53L0X/Api/core/inc/../../platform/inc/vl53l0x_i2c_platform.h:
+
+../../lib/e-puck2_main-processor/src/sensors/proximity.h:
 
 ../../lib/e-puck2_main-processor/src/leds.h:
 
