@@ -29,15 +29,11 @@
 
 
 void search_control(void){
-	if ((get_prox(0)>100 && get_prox(7)>100) | (get_prox(3)>100 && get_prox(4)>100)){
-		left_motor_set_speed(SEARCH_SPEED_LEFT);
-		right_motor_set_speed(SEARCH_SPEED_RIGHT);
-	}
-	else if (get_prox(0)>100 || get_prox(1)>100 || get_prox(2)>100 || get_prox(3)>100){
+	if (get_prox(1)>100 || get_prox(2)>100 || get_prox(3)>100){
 			left_motor_set_speed(SEARCH_SPEED_LEFT);
 			right_motor_set_speed(SEARCH_SPEED_RIGHT);
 	}
-	else if (get_prox(4)>100 || get_prox(5)>100 || get_prox(6)>100 || get_prox(7)>100){
+	else if (get_prox(4)>100 || get_prox(5)>100 || get_prox(6)>100){
 		left_motor_set_speed(SEARCH_SPEED_RIGHT);
 		right_motor_set_speed(SEARCH_SPEED_LEFT);
 	}
@@ -65,8 +61,6 @@ static THD_FUNCTION(SEARCHThd, arg) {
 				}
 				else{
 				search_control();
-				//left_motor_set_speed(SEARCH_SPEED_LEFT);
-				//right_motor_set_speed(SEARCH_SPEED_RIGHT);
 				search=true;
 				}
 			}

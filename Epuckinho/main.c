@@ -34,7 +34,7 @@ static bool fail_to_score = false;
 #define COLOR_LED_B 8
 #define SLEEP_THD 1000
 #define BLINK_MODE 2
-#define GAME_OVER 10000 //in ms = 10s to score (the match ends and Epuckinho loses)
+#define GAME_OVER 15000 //in ms = 10s to score (the match ends and Epuckinho loses)
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
