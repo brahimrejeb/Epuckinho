@@ -37,7 +37,7 @@
 void search_control(uint8_t* val ){
 	//uint8_t temp = *val;
 	int32_t blocked_pos = left_motor_get_pos()  ;
-	if(*val < 10 ){
+	/*if(*val < 10 ){
 		//chprintf((BaseSequentialStream *)&SD3, "OUT");
 		// If IR2 or IR3 or IR4 detects the ball then turn right
 		if ( get_calibrated_prox(2)> BALL_PROX || get_calibrated_prox(3)> BALL_PROX ){
@@ -51,26 +51,27 @@ void search_control(uint8_t* val ){
 			right_motor_set_speed(SEARCH_SPEED);
 			blocked_pos = left_motor_get_pos() ;
 		}
-		// turn right by default
-		else {
+		// turn right by default*/
+		//else {
 			left_motor_set_speed(SEARCH_SPEED);
 			right_motor_set_speed(-SEARCH_SPEED);
-			blocked_pos = left_motor_get_pos() ;
-		}
-	}
+		//	blocked_pos = left_motor_get_pos() ;
+		//}
+	//}
 	//chprintf((BaseSequentialStream *)&SD3, "%i \n", get_calibrated_prox(0));
 	if(get_calibrated_prox(0)> BALL_BLOCKED || get_calibrated_prox(7)> BALL_BLOCKED ){
 		*val += 1;
+		chprintf((BaseSequentialStream *)&SD3,"%i",*val );
 		if(*val>=10){
 
 			//chprintf((BaseSequentialStream *)&SD3, "HI");
-			left_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
-			right_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
+			left_motor_set_pos(10000*PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
+			right_motor_set_pos(10000*PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
 			left_motor_set_speed(SEARCH_SPEED);
 			right_motor_set_speed(-SEARCH_SPEED);
 			//chprintf((BaseSequentialStream *)&SD3, "%i", PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER );
-			while(left_motor_get_pos()-blocked_pos<=PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER){
-				chprintf((BaseSequentialStream *)&SD3,"%i",blocked_pos );//chprintf((BaseSequentialStream *)&SD3, "WHILE");
+			while(left_motor_get_pos()-blocked_pos<=10000*PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER){
+				;//chprintf((BaseSequentialStream *)&SD3,"%i",blocked_pos );//chprintf((BaseSequentialStream *)&SD3, "WHILE");
 			}
 		}
 	}
