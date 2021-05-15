@@ -20,42 +20,64 @@
 #define THRESV 650 // This is the speed under which the power save feature is active
 #define WHEEL_PERIMETER 130 // in [mm]
 #define NSTEP_ONE_TURN 1000 // Number of steps for 1 turn of the motor
-#define SEARCH_SPEED 500 // Constant speed in step/s of the robot when turning to find the ball
+#define SEARCH_SPEED 350 // Constant speed in step/s of the robot when turning to find the ball
 #define ATTACK_SPEED 1000 // Constant speed in step/s of the robot when moving towards the ball
 #define STOP_SPEED 0 // Halt speed
 #define CELEB_SPEED_LEFT 750 // Constant left speed in step/s of the robot when turning to celebrate the goal
 #define CELEB_SPEED_RIGHT -750 // Constant right speed in step/s of the robot when turning to celebrate the goal
 #define SLEEP_THD_SEARCH 100 // Sleep time of the search thread
 #define BALL_IN_THE_AREA 500 // Ball distance in [mm] from which the robot starts to move towards it
-#define BALL_PROX 65 // Ball distance in [mm] from the IR sensors from which the robot calibrates its sense of rotation
-#define BALL_BLOCKED 250
+#define BALL_PROX 100 // Ball distance in [mm] from the IR sensors from which the robot calibrates its sense of rotation
+#define BALL_BLOCKED 400
+#define PI                  3.1415926536f
+#define WHEEL_DISTANCE      5.35f    //cm
+#define PERIMETER_EPUCK     (PI * WHEEL_DISTANCE)
 /********************************** SEARCH CONTROL FUNCTION ***********************************/
 
-void search_control(uint8_t *val ){
-	uint8_t temp = *val;
-	// If IR2 or IR3 or IR4 detects the ball then turn right
-	if (get_prox(1)> BALL_PROX || get_prox(2)> BALL_PROX || get_prox(3)> BALL_PROX){
+void search_control(uint8_t* val ){
+	//uint8_t temp = *val;
+	int32_t blocked_pos = left_motor_get_pos()  ;
+	if(*val < 10 ){
+		//chprintf((BaseSequentialStream *)&SD3, "OUT");
+		// If IR2 or IR3 or IR4 detects the ball then turn right
+		if ( get_calibrated_prox(2)> BALL_PROX || get_calibrated_prox(3)> BALL_PROX ){
+				left_motor_set_speed(SEARCH_SPEED);
+				right_motor_set_speed(-SEARCH_SPEED);
+				blocked_pos = left_motor_get_pos() ;
+		}
+		// If IR5 or IR6 or IR7 detects the ball then turn left
+		else if (get_calibrated_prox(4)> BALL_PROX|| get_calibrated_prox(5)> BALL_PROX ){
+			left_motor_set_speed(-SEARCH_SPEED);
+			right_motor_set_speed(SEARCH_SPEED);
+			blocked_pos = left_motor_get_pos() ;
+		}
+		// turn right by default
+		else {
 			left_motor_set_speed(SEARCH_SPEED);
 			right_motor_set_speed(-SEARCH_SPEED);
+			blocked_pos = left_motor_get_pos() ;
+		}
 	}
-	// If IR5 or IR6 or IR7 detects the ball then turn left
-	else if (get_prox(4)> BALL_PROX|| get_prox(5)> BALL_PROX || get_prox(6)> BALL_PROX){
-		left_motor_set_speed(-SEARCH_SPEED);
-		right_motor_set_speed(SEARCH_SPEED);
+	//chprintf((BaseSequentialStream *)&SD3, "%i \n", get_calibrated_prox(0));
+	if(get_calibrated_prox(0)> BALL_BLOCKED || get_calibrated_prox(7)> BALL_BLOCKED ){
+		*val += 1;
+		if(*val>=10){
+
+			//chprintf((BaseSequentialStream *)&SD3, "HI");
+			left_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
+			right_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
+			left_motor_set_speed(SEARCH_SPEED);
+			right_motor_set_speed(-SEARCH_SPEED);
+			//chprintf((BaseSequentialStream *)&SD3, "%i", PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER );
+			while(left_motor_get_pos()-blocked_pos<=PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER){
+				chprintf((BaseSequentialStream *)&SD3,"%i",blocked_pos );//chprintf((BaseSequentialStream *)&SD3, "WHILE");
+			}
+		}
 	}
-	// turn right by default
-	else {
-		left_motor_set_speed(SEARCH_SPEED);
-		right_motor_set_speed(-SEARCH_SPEED);
-	}
-	if(get_prox(0)> BALL_BLOCKED || get_prox(7)> BALL_BLOCKED ){
-		temp++;
-		*val = temp;
-	}
-	else {
-		temp = 0;
-		*val = temp;
-	}
+	else{
+			*val=0;
+		}
+
 }
 
 
@@ -84,8 +106,7 @@ static THD_FUNCTION(SEARCHThd, arg){
 		}
 		dist= VL53L0X_get_dist_mm(); // Get the distance detected by the Time-of-Flight in mm
 		// If the ball is at a certain distance or less from the robot and there's no goal detected
-		chprintf((BaseSequentialStream *)&SDU1, "%i,", val);
-		if(dist<BALL_IN_THE_AREA && search==true && val < 30){
+		if(dist<BALL_IN_THE_AREA && search==true && val < 10){
 			left_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
 			right_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
 			left_motor_set_speed(ATTACK_SPEED); // Motor speed when moving towards the ball
