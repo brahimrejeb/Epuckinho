@@ -27,11 +27,12 @@
 #define CELEB_SPEED_RIGHT -750 // Constant right speed in step/s of the robot when turning to celebrate the goal
 #define SLEEP_THD_SEARCH 100 // Sleep time of the search thread
 #define BALL_IN_THE_AREA 500 // Ball distance in [mm] from which the robot starts to move towards it
-#define BALL_PROX 100 // Ball distance in [mm] from the IR sensors from which the robot calibrates its sense of rotation
-
+#define BALL_PROX 65 // Ball distance in [mm] from the IR sensors from which the robot calibrates its sense of rotation
+#define BALL_BLOCKED 250
 /********************************** SEARCH CONTROL FUNCTION ***********************************/
 
-void search_control(void){
+void search_control(uint8_t *val ){
+	uint8_t temp = *val;
 	// If IR2 or IR3 or IR4 detects the ball then turn right
 	if (get_prox(1)> BALL_PROX || get_prox(2)> BALL_PROX || get_prox(3)> BALL_PROX){
 			left_motor_set_speed(SEARCH_SPEED);
@@ -47,7 +48,16 @@ void search_control(void){
 		left_motor_set_speed(SEARCH_SPEED);
 		right_motor_set_speed(-SEARCH_SPEED);
 	}
+	if(get_prox(0)> BALL_BLOCKED || get_prox(7)> BALL_BLOCKED ){
+		temp++;
+		*val = temp;
+	}
+	else {
+		temp = 0;
+		*val = temp;
+	}
 }
+
 
 /********************************** SEARCH THREAD ***********************************/
 
@@ -57,6 +67,7 @@ static THD_FUNCTION(SEARCHThd, arg){
 	chRegSetThreadName("SEARCHThd");
 	bool search=false;
 	bool no_goal=true;
+	static uint8_t val = 0;
 	uint16_t dist=0;
 	// Thread loop while there's no termination request and the game duration didn't exceed 15s
     while (chThdShouldTerminateX() == false && get_fail_to_score()== false){
@@ -67,13 +78,14 @@ static THD_FUNCTION(SEARCHThd, arg){
 				search=false;
 			}
 			else{
-				search_control();
+				search_control(&val);
 				search=true;
 			}
 		}
 		dist= VL53L0X_get_dist_mm(); // Get the distance detected by the Time-of-Flight in mm
 		// If the ball is at a certain distance or less from the robot and there's no goal detected
-		if(dist<BALL_IN_THE_AREA && search==true ){
+		chprintf((BaseSequentialStream *)&SDU1, "%i,", val);
+		if(dist<BALL_IN_THE_AREA && search==true && val < 30){
 			left_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
 			right_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
 			left_motor_set_speed(ATTACK_SPEED); // Motor speed when moving towards the ball

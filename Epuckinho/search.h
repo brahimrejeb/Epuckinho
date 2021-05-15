@@ -5,6 +5,6 @@
 
 void start_search(void);
 
-void search_control(void);
+void search_control(uint8_t *val );
 
 #endif /* SEARCH_H_ */

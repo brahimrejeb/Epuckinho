@@ -24,16 +24,17 @@ static bool start_celeb = false; // Start celebration flag
 static uint32_t time_start=0; // The system time when the robot starts searching for the ball in ticks
 
 #define MIN_VALUE_THRESHOLD	10000 
-#define MIN_FREQ 5 // We don't analyze before this index to not use resources for nothing
+#define MIN_FREQ 20 // We don't analyze before this index to not use resources for nothing
 #define FREQ_START_L 143.2  // The minimum frequency that the robot should detect to start the ball search: 2200Hz
 #define FREQ_START_H 149.72 // The maximum frequency that the robot should detect to start the ball search: 2300Hz
 #define MAX_FREQ 160 // We don't analyze after this index to not use resources for nothing
-#define FREQ_CELEB_L 5.5 // The minimum frequency that the robot should detect to celebrate: 90Hz
-#define FREQ_CELEB_H 6.5 // The maximum frequency that the robot should detect to celebrate: 100Hz
+#define FREQ_CELEB_L 35 // The minimum frequency that the robot should detect to celebrate: 90Hz
+#define FREQ_CELEB_H 40 // The maximum frequency that the robot should detect to celebrate: 100Hz
 
 /* Simple function used to detect the highest value in a buffer
 *	and to execute a motor command depending on it
 */
+
 void sound_remote(float* data){
 	float max_norm = MIN_VALUE_THRESHOLD;
 	int16_t max_norm_index = -1; 
