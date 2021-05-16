@@ -28,8 +28,8 @@ static uint32_t time_start=0; // The system time when the robot starts searching
 #define FREQ_START_L 143.2  // The minimum frequency that the robot should detect to start the ball search: 2200Hz
 #define FREQ_START_H 149.72 // The maximum frequency that the robot should detect to start the ball search: 2300Hz
 #define MAX_FREQ 160 // We don't analyze after this index to not use resources for nothing
-#define FREQ_CELEB_L 35 // The minimum frequency that the robot should detect to celebrate: 90Hz
-#define FREQ_CELEB_H 40 // The maximum frequency that the robot should detect to celebrate: 100Hz
+#define FREQ_CELEB_L 35 // The minimum frequency that the robot should detect to celebrate: 540Hz
+#define FREQ_CELEB_H 40 // The maximum frequency that the robot should detect to celebrate: 620Hz
 
 /* Simple function used to detect the highest value in a buffer
 *	and to execute a motor command depending on it

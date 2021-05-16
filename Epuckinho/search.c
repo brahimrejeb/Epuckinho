@@ -27,12 +27,12 @@ static bool no_goal = true;
 #define SEARCH_SPEED 350 // Constant speed in step/s of the robot when turning to find the ball
 #define ATTACK_SPEED 1000 // Constant speed in step/s of the robot when moving towards the ball
 #define STOP_SPEED 0 // Halt speed
-#define CELEB_SPEED_LEFT 750 // Constant left speed in step/s of the robot when turning to celebrate the goal
-#define CELEB_SPEED_RIGHT -750 // Constant right speed in step/s of the robot when turning to celebrate the goal
+#define CELEB_SPEED_LEFT 750 // Constant left motor speed in step/s of the robot when turning to celebrate the goal
+#define CELEB_SPEED_RIGHT -750 // Constant right motor speed in step/s of the robot when turning to celebrate the goal
 #define SLEEP_THD_SEARCH 100 // Sleep time of the search thread
 #define BALL_IN_THE_AREA 500 // Ball distance in [mm] from which the robot starts to move towards it
-#define BALL_PROX 100 // Ball distance in [mm] from the IR sensors from which the robot calibrates its sense of rotation
-#define BALL_BLOCKED 400
+#define BALL_BLOCKED 350 //Threshold value from the IR sensors from which the robot analyses if it's blocked
+#define BALL_BLOCKED_CONFIRMED 10 //Threshold value to confirm if the ball is blocked or not
 #define PI                  3.1415926536f
 #define WHEEL_DISTANCE      5.35f    // in [cm]
 #define PERIMETER_EPUCK     (PI * WHEEL_DISTANCE)
@@ -42,7 +42,7 @@ static bool no_goal = true;
 /* Function used to detect if the ball is blocked in a corner. IR1 and IR8 sensors are used.
 * params :
 * uint8_t* counter : a counter value that is incremented when the IR1 and IR8 sensors are so close to the ball.
-* When this value reaches a threshold (in this case we chose 10), the ball is blocked and the robot
+* When this value reaches the threshold BALL_BLOCKED_CONFIRMED (in this case we chose it 10), the ball is blocked and the robot
 * starts turning in order to generate the rotation of the ball. Thus, the ball moves and is unblocked.
 */
 void unblock_ball(uint8_t* counter ){
@@ -51,7 +51,7 @@ void unblock_ball(uint8_t* counter ){
 	right_motor_set_speed(-SEARCH_SPEED);
 	if(get_calibrated_prox(0)> BALL_BLOCKED || get_calibrated_prox(7)> BALL_BLOCKED ){
 		*counter+= 1;
-		if(*counter>=10){
+		if(*counter>=BALL_BLOCKED_CONFIRMED){
 			left_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor makes one turn
 			right_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor makes one turn
 			left_motor_set_speed(SEARCH_SPEED);
@@ -85,8 +85,6 @@ static THD_FUNCTION(SEARCHThd, arg){
 					search=false;
 				}
 				else{
-
-
 					unblock_ball(&counter); // Unblock the ball if it's stuck in a corner
 					search=true;
 				}
