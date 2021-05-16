@@ -14,6 +14,10 @@
 #include "audio_processing.h"
 #include "sensors/VL53L0X/VL53L0X.h"
 
+/********************************** STATIC GLOBALE VARIABLES ***********************************/
+
+static bool no_goal = true;
+
 /********************************** MAGIC NUMBERS ***********************************/
 
 #define MOTOR_TIMER_FREQ 100000 // in [Hz]
@@ -30,57 +34,37 @@
 #define BALL_PROX 100 // Ball distance in [mm] from the IR sensors from which the robot calibrates its sense of rotation
 #define BALL_BLOCKED 400
 #define PI                  3.1415926536f
-#define WHEEL_DISTANCE      5.35f    //cm
+#define WHEEL_DISTANCE      5.35f    // in [cm]
 #define PERIMETER_EPUCK     (PI * WHEEL_DISTANCE)
+
 /********************************** SEARCH CONTROL FUNCTION ***********************************/
 
-void search_control(uint8_t* val ){
-	//uint8_t temp = *val;
-	int32_t blocked_pos = left_motor_get_pos()  ;
-	/*if(*val < 10 ){
-		//chprintf((BaseSequentialStream *)&SD3, "OUT");
-		// If IR2 or IR3 or IR4 detects the ball then turn right
-		if ( get_calibrated_prox(2)> BALL_PROX || get_calibrated_prox(3)> BALL_PROX ){
-				left_motor_set_speed(SEARCH_SPEED);
-				right_motor_set_speed(-SEARCH_SPEED);
-				blocked_pos = left_motor_get_pos() ;
-		}
-		// If IR5 or IR6 or IR7 detects the ball then turn left
-		else if (get_calibrated_prox(4)> BALL_PROX|| get_calibrated_prox(5)> BALL_PROX ){
-			left_motor_set_speed(-SEARCH_SPEED);
-			right_motor_set_speed(SEARCH_SPEED);
-			blocked_pos = left_motor_get_pos() ;
-		}
-		// turn right by default*/
-		//else {
-			left_motor_set_speed(SEARCH_SPEED);
-			right_motor_set_speed(-SEARCH_SPEED);
-		//	blocked_pos = left_motor_get_pos() ;
-		//}
-	//}
-	//chprintf((BaseSequentialStream *)&SD3, "%i \n", get_calibrated_prox(0));
+/* Function used to detect if the ball is blocked in a corner. IR1 and IR8 sensors are used.
+* params :
+* uint8_t* counter : a counter value that is incremented when the IR1 and IR8 sensors are so close to the ball.
+* When this value reaches a threshold (in this case we chose 10), the ball is blocked and the robot
+* starts turning in order to generate the rotation of the ball. Thus, the ball moves and is unblocked.
+*/
+void unblock_ball(uint8_t* counter ){
+	int32_t blocked_pos = left_motor_get_pos(); // Return the last position of the left motor
+	left_motor_set_speed(SEARCH_SPEED);
+	right_motor_set_speed(-SEARCH_SPEED);
 	if(get_calibrated_prox(0)> BALL_BLOCKED || get_calibrated_prox(7)> BALL_BLOCKED ){
-		*val += 1;
-		chprintf((BaseSequentialStream *)&SD3,"%i",*val );
-		if(*val>=10){
-
-			//chprintf((BaseSequentialStream *)&SD3, "HI");
-			left_motor_set_pos(10000*PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
-			right_motor_set_pos(10000*PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
+		*counter+= 1;
+		if(*counter>=10){
+			left_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor makes one turn
+			right_motor_set_pos(PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor makes one turn
 			left_motor_set_speed(SEARCH_SPEED);
 			right_motor_set_speed(-SEARCH_SPEED);
-			//chprintf((BaseSequentialStream *)&SD3, "%i", PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER );
-			while(left_motor_get_pos()-blocked_pos<=10000*PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER){
-				;//chprintf((BaseSequentialStream *)&SD3,"%i",blocked_pos );//chprintf((BaseSequentialStream *)&SD3, "WHILE");
+			while(left_motor_get_pos()-blocked_pos<=PERIMETER_EPUCK * NSTEP_ONE_TURN / WHEEL_PERIMETER){
+				; // Nothing to do until the robot makes a complete turn
 			}
 		}
 	}
 	else{
-			*val=0;
-		}
-
+		*counter=0; // The ball is not blocked
+	}
 }
-
 
 /********************************** SEARCH THREAD ***********************************/
 
@@ -89,39 +73,41 @@ static THD_FUNCTION(SEARCHThd, arg){
 	(void)arg;
 	chRegSetThreadName("SEARCHThd");
 	bool search=false;
-	bool no_goal=true;
-	static uint8_t val = 0;
+	static uint8_t counter = 0;
 	uint16_t dist=0;
 	// Thread loop while there's no termination request and the game duration didn't exceed 15s
-    while (chThdShouldTerminateX() == false && get_fail_to_score()== false){
-    	// If the sound of the whistle has been detected
-    	if(get_start_detected()==true){
-    		if (no_goal==false){
-    			set_start_detected(false);
-				search=false;
+	while (chThdShouldTerminateX() == false){
+		while (get_fail_to_score()== false){
+			// If the sound of the whistle has been detected
+			if(get_start_detected()==true){
+				if (no_goal==false){
+					set_start_detected(false);
+					search=false;
+				}
+				else{
+
+
+					unblock_ball(&counter); // Unblock the ball if it's stuck in a corner
+					search=true;
+				}
 			}
-			else{
-				search_control(&val);
-				search=true;
+			dist= VL53L0X_get_dist_mm(); // Get the distance detected by the Time-of-Flight in mm
+			// If the ball is at a certain distance or less from the robot and there's no goal detected
+			if(dist<BALL_IN_THE_AREA && search==true && counter < 10){
+				left_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
+				right_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
+				left_motor_set_speed(ATTACK_SPEED);
+				right_motor_set_speed(ATTACK_SPEED);
 			}
+			// If the sound of the ball in the goal has been detected
+			if (get_start_celeb() == true){
+				left_motor_set_speed(CELEB_SPEED_LEFT);
+				right_motor_set_speed(CELEB_SPEED_RIGHT);
+				no_goal=false;
+			}
+			chThdSleepMilliseconds(SLEEP_THD_SEARCH);
 		}
-		dist= VL53L0X_get_dist_mm(); // Get the distance detected by the Time-of-Flight in mm
-		// If the ball is at a certain distance or less from the robot and there's no goal detected
-		if(dist<BALL_IN_THE_AREA && search==true && val < 10){
-			left_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Left motor stops after reaching the ball
-			right_motor_set_pos(dist * NSTEP_ONE_TURN / WHEEL_PERIMETER); // Right motor stops after reaching the ball
-			left_motor_set_speed(ATTACK_SPEED); // Motor speed when moving towards the ball
-			right_motor_set_speed(ATTACK_SPEED); // Motor speed when moving towards the ball
-			//search=false;
-		}
-		// If the sound of the ball in the goal has been detected
-		if (get_start_celeb() == true){
-			left_motor_set_speed(CELEB_SPEED_LEFT);
-			right_motor_set_speed(CELEB_SPEED_RIGHT);
-			no_goal=false;
-		}
-		chThdSleepMilliseconds(SLEEP_THD_SEARCH);
-    }
+	}
 }
 
 /********************************** THREAD CALL FUNCTION ***********************************/
@@ -134,5 +120,10 @@ void start_search(void){
 	                     NULL);
 }
 
-
+bool get_no_goal(void){
+	return no_goal;
+}
+void set_no_goal(bool val){
+	no_goal = val;
+}
 

@@ -37,14 +37,10 @@ static bool fail_to_score = false; //verify if the simulation has passed 15 seco
 #define LED4_RGB 1
 #define LED6_RGB 2
 #define LED8_RGB 3
-#define COLOR_LED_R 10	// Intensity of the red color
-#define COLOR_LED_G 5	// Intensity of the green color
-#define COLOR_LED_B 8	// Intensity of the blue color
-#define COLOR_INTENSITY 10	// Intensity of the blue color
-
+#define COLOR_INTENSITY 10	// Intensity of the RGB color
 #define SLEEP_THD 1000	// Sleep duration for the main thread in ms
 #define BLINK_MODE 2	// Blink mode
-#define GAME_OVER 30000 // in ms = 15s to score (the match ends and Epuckinho loses)
+#define GAME_OVER 30000 // in ms = 30s to score (the match ends and Epuckinho loses)
 #define STACK_CHK_GUARD 0xe2dee396
 
 messagebus_t bus;
@@ -62,35 +58,54 @@ static void serial_start(void){
 	sdStart(&SD3, &ser_cfg);
 }
 
-// Celebration when the ball enters the goal
-void celebrate(void){
-	toggle_rgb_led(LED8_RGB, GREEN_LED, COLOR_INTENSITY);
-	toggle_rgb_led(LED6_RGB, GREEN_LED, COLOR_INTENSITY);
-	toggle_rgb_led(LED4_RGB, GREEN_LED, COLOR_INTENSITY);
-	toggle_rgb_led(LED2_RGB, GREEN_LED, COLOR_INTENSITY);
-	/*set_rgb_led(LED8_RGB ,0,10,0); // Display L8
-	set_rgb_led(LED6_RGB ,0,10,0); // Display L6
-	set_rgb_led(LED4_RGB ,0,10,0); // Display L4
-	set_rgb_led(LED2_RGB ,0,10,0); // Display L2  */
-	//set_body_led(BLINK_MODE); // Blinky mode for the body led in green
-	//playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL); // Play celebration melody
+
+/* Function used to celebrate when the ball enters the goal.
+* params :
+* uint8_t* nb_goals : a counter value that is incremented when a goal is scored. We display the score of the game
+* by RGB leds. If two goals has been scored, led8 and led6 will be set on.
+* Final celebration includes playing melody and blinky mode of the body led.
+*/
+void celebrate(uint8_t *nb_goals){
+	set_start_celeb(false);
+	*nb_goals+=1;
+	switch(*nb_goals){
+		case 1 :
+			set_rgb_led(LED8_RGB,0,10,0);
+			set_start_detected(false);
+			set_fail_to_score(false);
+			set_no_goal(true);
+			break;
+		case 2 :
+			set_rgb_led(LED6_RGB, 0,10,0);
+			set_start_detected(false);
+			set_fail_to_score(false);
+			set_no_goal(true);
+			break;
+		case 3 :
+			set_rgb_led(LED4_RGB, 0,10,0);
+			set_start_detected(false);
+			set_fail_to_score(false);
+			set_no_goal(true);
+			break;
+		case 4 :
+			set_rgb_led(LED2_RGB, 0,10,0);
+			set_body_led(BLINK_MODE); // Blinky mode for the body led in green
+			playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL); // Play celebration melody
+			break;
+	}
 }
 
-// Failure when the simulation time exceeds 15 seconds
+// Failure when the simulation time exceeds 30 seconds
 void game_over(void){
 	 fail_to_score = true; // Report the failure of the robot and end of game
-	 left_motor_set_speed(STOP_SPEED); // Halt speed for the left motor
-	 right_motor_set_speed(STOP_SPEED); // Halt speed for the right motor
-	 toggle_rgb_led(LED8_RGB, RED_LED, COLOR_INTENSITY);
-	 toggle_rgb_led(LED6_RGB, RED_LED, COLOR_INTENSITY);
-	 toggle_rgb_led(LED4_RGB, RED_LED, COLOR_INTENSITY);
-	 toggle_rgb_led(LED2_RGB, RED_LED, COLOR_INTENSITY);
-	 /* set_rgb_led(LED8_RGB ,10,0,0); // Display L8
-	 set_rgb_led(LED6_RGB ,10,0,0); // Display L6
-	 set_rgb_led(LED4_RGB ,10,0,0); // Display L4
-	 set_rgb_led(LED2_RGB ,10,0,0); // Display L2   */
-	 //set_front_led(BLINK_MODE); // Blinky mode for the front led in red
-	 //playMelody(MARIO_DEATH, ML_SIMPLE_PLAY, NULL); // Play failure melody
+	 left_motor_set_speed(STOP_SPEED);
+	 right_motor_set_speed(STOP_SPEED);
+	 toggle_rgb_led(LED8_RGB, BLUE_LED, COLOR_INTENSITY);
+	 toggle_rgb_led(LED6_RGB, BLUE_LED, COLOR_INTENSITY);
+	 toggle_rgb_led(LED4_RGB, BLUE_LED, COLOR_INTENSITY);
+	 toggle_rgb_led(LED2_RGB, BLUE_LED, COLOR_INTENSITY);
+	 set_front_led(BLINK_MODE); // Blinky mode for the front led in red
+	 playMelody(MARIO_DEATH, ML_SIMPLE_PLAY, NULL); // Play failure melody
 }
 
 /********************************** MAIN FUNCTION ***********************************/
@@ -111,13 +126,14 @@ int main(void){
     // Start the melody processing thread
     dac_start();
     playMelodyStart();
+    static uint8_t nb_goals=0;
     /* Infinite loop. */
     while (1) {
     	if (get_start_celeb()==true && fail_to_score ==false ){
-    		celebrate();
+    		celebrate(&nb_goals);
     	}
     	if (chVTGetSystemTime()-get_time_start() > GAME_OVER && get_start_detected()==true){
-    		game_over(); // End of the game if the simulation time has exceeded 15 seconds
+    		game_over(); // End of the game if the simulation time has exceeded 30 seconds
     	}
     	chThdSleepMilliseconds(SLEEP_THD); // Sleep of the main thread
     }
@@ -128,6 +144,10 @@ bool get_fail_to_score(void){
 	return fail_to_score;
 }
 
+// Set the fail_to_score value
+void set_fail_to_score(bool val){
+	fail_to_score=val;
+}
 /********************************** HALT CHIBIOS IN CASE OF ERRORS ***********************************/
 
 uintptr_t __stack_chk_guard = STACK_CHK_GUARD;
