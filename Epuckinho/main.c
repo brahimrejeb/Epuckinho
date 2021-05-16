@@ -1,15 +1,21 @@
+/*
+*	Systèmes embarqués et robotique
+*	Projet : Epuckinho
+*	Réalisé par :
+*	Nadia Hadjmbarek 289285
+*	Brahim Rejeb 284564
+*	Professeur : Francesco Mondada
+*/
 
-/********************************** INCLUDES ***********************************/
+/********************************** INCLUDE ***********************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "ch.h"
 #include "hal.h"
 #include "memory_protection.h"
 #include "spi_comm.h"
-
 #include <usbcfg.h>
 #include <main.h>
 #include <chprintf.h>
@@ -30,9 +36,9 @@
 
 /********************************** STATIC GLOBAL VARIABLES ***********************************/
 
-static bool fail_to_score = false; //verify if the simulation has passed 15 seconds
+static bool fail_to_score = false; //verify if the simulation has passed 30 seconds
 
-/********************************** MAGIC NUMBERS ***********************************/
+/********************************** CONSTANTS ***********************************/
 
 #define LED2_RGB 0
 #define LED4_RGB 1
@@ -42,9 +48,9 @@ static bool fail_to_score = false; //verify if the simulation has passed 15 seco
 #define LED_GREEN_R 0 //Intensity of red in RGB led for green color
 #define LED_GREEN_G 10 //Intensity of green in RGB led for green color
 #define LED_GREEN_B 0 //Intensity of blue in RGB led for green color
-#define SLEEP_THD 1000	// Sleep duration for the main thread in ms
-#define BLINK_MODE 2	// Blink mode
-#define GAME_OVER 20000 // in ms = 20s to score , converted to ticks with MS2ST (the match ends and Epuckinho loses)
+#define SLEEP_THD 1000 // Sleep duration for the main thread in [ms]
+#define BLINK_MODE 2 // Blink mode
+#define GAME_OVER 30000 // in[ms] = 30s to score , converted to ticks with MS2ST (the match ends and Epuckinho loses)
 #define STACK_CHK_GUARD 0xe2dee396
 
 messagebus_t bus;
@@ -54,7 +60,7 @@ CONDVAR_DECL(bus_condvar);
 // Start the UART3 communication
 static void serial_start(void){
 	static SerialConfig ser_cfg = {
-	    115200,
+		115200,
 	    0,
 	    0,
 	    0,
@@ -62,48 +68,56 @@ static void serial_start(void){
 	sdStart(&SD3, &ser_cfg);
 }
 
-
-/* Function used to celebrate when the ball enters the goal and show the score with RGB leds
+/* Function used to celebrate when the ball enters the goal and show the score with RGB leds and
+* prepare to another shot if goals<4
 * params :
-* uint8_t* nb_goals : a counter value that is incremented when a goal is scored. We display the score of the game
-* by RGB leds. If two goals has been scored, led8 and led6 will be set on.
-* Final celebration includes playing melody and blinky mode of the body led.
+* uint8_t* nb_goals : a counter value that is incremented when a goal is scored. We display
+* the score of the game by RGB leds.
+* If two goals has been scored, led8 and led6 will be set on.
+* Final celebration includes playing the melody WE_ARE_THE_CHAMPIONS and blinky mode for the body led.
 */
+
 void celebrate(uint8_t *nb_goals){
 	set_start_celeb(false);
-	*nb_goals+=1;
-	//add a goal to the score
-	//show the score with leds and prepare to another shot if goals<4
-	//the score is the number of RGB leds on .
-	//the final celebration includes playing the melody WE_ARE_THE_CHAMPIONS and blinking body_led
+	*nb_goals+=1; // Add a goal to the score
 	switch(*nb_goals){
 		case 1 :
-			set_rgb_led(LED8_RGB,LED_GREEN_R,LED_GREEN_G,LED_GREEN_B);
+			set_rgb_led(LED8_RGB,LED_GREEN_R,LED_GREEN_G,LED_GREEN_B); // RGB led8 is on in green
+			/*
+			* Prepare to restart the game
+			*/
 			set_start_detected(false);
 			set_fail_to_score(false);
 			set_no_goal(true);
 			break;
 		case 2 :
-			set_rgb_led(LED6_RGB, LED_GREEN_R,LED_GREEN_G,LED_GREEN_B);
+			set_rgb_led(LED6_RGB, LED_GREEN_R,LED_GREEN_G,LED_GREEN_B); // RGB led6 is on in green
+			/*
+			* Prepare to restart the game
+			*/
 			set_start_detected(false);
 			set_fail_to_score(false);
 			set_no_goal(true);
 			break;
 		case 3 :
-			set_rgb_led(LED4_RGB, LED_GREEN_R,LED_GREEN_G,LED_GREEN_B);
+			set_rgb_led(LED4_RGB, LED_GREEN_R,LED_GREEN_G,LED_GREEN_B); // RGB led4 is on in green
+			/*
+		    * Prepare to restart the game
+			*/
 			set_start_detected(false);
 			set_fail_to_score(false);
 			set_no_goal(true);
 			break;
 		default :
-			set_rgb_led(LED2_RGB, LED_GREEN_R,LED_GREEN_G,LED_GREEN_B);
+			set_rgb_led(LED2_RGB, LED_GREEN_R,LED_GREEN_G,LED_GREEN_B); // RGB led2 is on in green
 			set_body_led(BLINK_MODE); // Blinky mode for the body led in green
 			playMelody(WE_ARE_THE_CHAMPIONS, ML_SIMPLE_PLAY, NULL); // Play celebration melody
 			break;
 	}
 }
 
-// Failure when the simulation time exceeds 20 seconds
+// Failure when the simulation time exceeds 30 seconds
+
 void game_over(void){
 	 fail_to_score = true; // Report the failure of the robot and end of game
 	 left_motor_set_speed(STOP_SPEED);
@@ -131,16 +145,13 @@ int main(void){
     VL53L0X_start();  // Start the Time-of-Flight thread
     mic_start(&processAudioData); // Start the microphones processing thread
     start_search(); // Start the search thread
-    // Start the melody processing thread
-    //Starts the digital-to-analog converter
-    dac_start();
-    // Start the melody processing thread
-    playMelodyStart();
+    dac_start(); // Start the digital-to-analog converter
+    playMelodyStart(); // Start the melody processing thread
     static uint8_t nb_goals=0;
     /* Infinite loop. */
-    while (1) {
-    	if (get_start_celeb()==true && fail_to_score ==false ){
-    		celebrate(&nb_goals);//celebrates,shows score and prepares for another shot if nb_goals <4
+    while (1){
+    	if (get_start_celeb()==true && fail_to_score ==false){
+    		celebrate(&nb_goals); //celebrates,shows score and prepares for another shot if nb_goals <4
     	}
     	if (chVTGetSystemTime()-get_time_start() > MS2ST(GAME_OVER) && get_start_detected()==true){
     		game_over(); // End of the game if the simulation time has exceeded 30 seconds
@@ -149,20 +160,26 @@ int main(void){
     }
 }
 
-// return the fail_to_score value
+// Return the fail_to_score value
+
 bool get_fail_to_score(void){
 	return fail_to_score;
 }
 
-// Set the fail_to_score value
+/*
+*  Function to change the value of the static variable fail_to_score
+*  params :
+*  bool val : Tells the new value that we desire to set for the variable fail_to_score
+*/
+
 void set_fail_to_score(bool val){
 	fail_to_score=val;
 }
+
 /********************************** HALT CHIBIOS IN CASE OF ERRORS ***********************************/
 
 uintptr_t __stack_chk_guard = STACK_CHK_GUARD;
-void __stack_chk_fail(void)
-{
+void __stack_chk_fail(void){
     chSysHalt("Stack smashing detected");
 }
 

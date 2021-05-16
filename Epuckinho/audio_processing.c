@@ -1,12 +1,11 @@
 
-/********************************** INCLUDES ***********************************/
+/********************************** INCLUDE ***********************************/
 
 #include "ch.h"
 #include "hal.h"
 #include <main.h>
 #include <usbcfg.h>
 #include <chprintf.h>
-
 #include <search.h>
 #include <motors.h>
 #include <audio/microphone.h>
@@ -22,6 +21,8 @@ static float micLeft_output[FFT_SIZE]; // Arrays containing the computed magnitu
 static bool start_detected = false; // Start ball detection flag
 static bool start_celeb = false; // Start celebration flag
 static uint32_t time_start=0; // The system time when the robot starts searching for the ball in ticks
+
+/********************************** CONSTANTS ***********************************/
 
 #define MIN_VALUE_THRESHOLD	10000 
 #define MIN_FREQ 20 // We don't analyze before this index to not use resources for nothing
@@ -45,9 +46,9 @@ void sound_remote(float* data){
 			max_norm_index = i;
 		}
 	}
-	// Start to play
+	// Start to play if a whistle sound is detected
 	if(max_norm_index >= FREQ_START_L && max_norm_index <= FREQ_START_H){
-		start_detected = true;
+		start_detected = true; // The start signal is detected and the game begins
 		time_start=chVTGetSystemTime(); // Return the system time in ticks when game begins
 	}
 	// A goal is detected : celebrate it !
@@ -57,7 +58,7 @@ void sound_remote(float* data){
 }
 
 /*
-*	Callback called when the demodulation of the back microphone is done.
+*	Callback called when the demodulation of the left microphone is done.
 *	We get 160 samples per mic every 10ms (16kHz)
 *	
 *	params :
@@ -65,6 +66,7 @@ void sound_remote(float* data){
 *							so we have [micRight1, micLeft1, micBack1, micFront1, micRight2, etc...]
 *	uint16_t num_samples	Tells how many data we get in total (should always be 640)
 */
+
 void processAudioData(int16_t *data, uint16_t num_samples){
 	/*
 	*
@@ -76,7 +78,7 @@ void processAudioData(int16_t *data, uint16_t num_samples){
 	static uint16_t nb_samples = 0;
 	// Loop to fill the buffers
 	for(uint16_t i = 0 ; i < num_samples ; i+=4){
-		//construct an array of complex numbers. Put 0 to the imaginary part
+		// Construct an array of complex numbers. Put 0 to the imaginary part
 		micLeft_cmplx_input[nb_samples] = (float)data[i + MIC_LEFT];
 		nb_samples++;
 		micLeft_cmplx_input[nb_samples] = 0;

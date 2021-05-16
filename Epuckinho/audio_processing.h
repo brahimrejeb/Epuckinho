@@ -29,10 +29,10 @@ void wait_send_to_computer(void);
 *	Returns the pointer to the BUFFER_NAME_t buffer asked
 */
 float* get_audio_buffer_ptr(BUFFER_NAME_t name);
-
 bool get_start_detected(void);
 void set_start_detected(bool state);
 bool get_start_celeb (void);
 void set_start_celeb(bool state);
 uint32_t get_time_start(void);
+
 #endif /* AUDIO_PROCESSING_H */

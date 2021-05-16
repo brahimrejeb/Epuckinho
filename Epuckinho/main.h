@@ -12,8 +12,8 @@ extern "C" {
 
 /** Robot wide IPC bus. */
 extern messagebus_t bus;
-
 extern parameter_namespace_t parameter_root;
+
 bool get_fail_to_score(void);
 void set_fail_to_score(bool val);
 
